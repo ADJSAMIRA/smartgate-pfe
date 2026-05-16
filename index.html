@@ -21,12 +21,11 @@
     </div>
 
     <script>
-        const CLOUDFLARE_URL = "https://packs-recorders-marks-imagine.trycloudflare.com";
+        // *** تأكدي أن هذا الرابط هو رابط الـ Cloudflare الحالي ***
+        const CLOUDFLARE_URL = "https://privileges-combining-ext-filtering.trycloudflare.com";
 
-        // id from url
         const urlParams = new URLSearchParams(window.location.search);
         const userId = urlParams.get('id');
-
         const statusText = document.getElementById("status");
         const loader = document.getElementById("loader");
 
@@ -35,19 +34,20 @@
                 .then(response => response.json())
                 .then(data => {
                     loader.style.display = "none";
-                    if(data.success || data.status === 'OPEN') {
+                    // التعديل هنا: نتحقق من status أو success
+                    if(data.status === 'OPEN' || data.success === true) {
                         statusText.innerHTML = "✅ ACCESS GRANTED<br><span style='font-size:16px; font-weight:normal;'>Gate is opening...</span>";
                         statusText.style.color = "#155724";
                         statusText.style.backgroundColor = "#d4edda";
                     } else {
-                        statusText.innerHTML = "❌ ACCESS DENIED<br><span style='font-size:16px; font-weight:normal;'>Invalid or blocked user.</span>";
+                        statusText.innerHTML = "❌ ACCESS DENIED<br><span style='font-size:16px; font-weight:normal;'>Invalid or inactive user.</span>";
                         statusText.style.color = "#721c24";
                         statusText.style.backgroundColor = "#f8d7da";
                     }
                 })
                 .catch(error => {
                     loader.style.display = "none";
-                    statusText.innerHTML = "⚠️ ERROR<br><span style='font-size:16px; font-weight:normal;'>Server is offline or URL changed.</span>";
+                    statusText.innerHTML = "⚠️ ERROR<br><span style='font-size:16px; font-weight:normal;'>Server connection failed.</span>";
                     statusText.style.color = "#856404";
                     statusText.style.backgroundColor = "#fff3cd";
                 });
