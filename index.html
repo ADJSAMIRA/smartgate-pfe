@@ -21,7 +21,6 @@
     </div>
 
     <script>
-        // *** تأكدي أن هذا الرابط هو رابط الـ Cloudflare الحالي ***
         const CLOUDFLARE_URL = "https://amazing-demographic-cardiovascular-louis.trycloudflare.com";
 
         const urlParams = new URLSearchParams(window.location.search);
@@ -34,7 +33,6 @@
                 .then(response => response.json())
                 .then(data => {
                     loader.style.display = "none";
-                    // التعديل هنا: نتحقق من status أو success
                     if(data.status === 'OPEN' || data.success === true) {
                         statusText.innerHTML = "✅ ACCESS GRANTED<br><span style='font-size:16px; font-weight:normal;'>Gate is opening...</span>";
                         statusText.style.color = "#155724";
